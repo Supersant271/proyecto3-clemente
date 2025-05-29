@@ -1,21 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
-using proyecto3_clemente.Models;
+using MongoDB.Driver;
 
-namespace proyecto3_clemente.Controllers.Api
-{
-    [ApiController]
-    [Route("proyecto3-clemente")]
-    public class MiProyectoController : ControllerBase
-    {
-        [HttpGet("integrantes")]
-        public ActionResult<MiProyecto> Integrantes()
+
+[Route("mi-proyecto")]
+public class MiProyectoController : ControllerBase{
+
+    [HttpGet("integrante")]
+    public IActionResult Integrantes() {
+        Integrantes proyecto = new Integrantes
         {
-            var proyecto = new MiProyecto
-            {
-                NombreIntegrante1 = "Clemente Santiago"
-            };
-
-            return Ok(proyecto);
-        }
+            NombreIntegrante1 = "Santiago Abad Clemente Arredondo"
+        };
+        return Ok(proyecto);
     }
+
+    [HttpGet("presentacion")]
+    public IActionResult Presentacion(){
+        MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
+        var db = client.GetDatabase("Escuela_Daniel_Emmanuel");
+        var collection = db.GetCollection<Equipo>("Equipo");
+
+        var lista = collection.Find(FilterDefinition<Equipo>.Empty).ToList();
+
+        return Ok(lista);
+    }
+
 }
