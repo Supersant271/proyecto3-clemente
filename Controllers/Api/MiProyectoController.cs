@@ -17,7 +17,7 @@ public class MiProyectoController : ControllerBase{
     [HttpGet("presentacion")]
     public IActionResult Presentacion(){
         MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
-        var db = client.GetDatabase("Escuela_Daniel_Emmanuel");
+        var db = client.GetDatabase("Santiago Abad Clemente Arredondo|");
         var collection = db.GetCollection<Equipo>("Equipo");
 
         var lista = collection.Find(FilterDefinition<Equipo>.Empty).ToList();
