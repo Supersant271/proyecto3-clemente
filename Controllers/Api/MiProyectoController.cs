@@ -15,12 +15,14 @@ public class MiProyectoController : ControllerBase{
     }
 
     [HttpGet("presentacion")]
-    public IActionResult Presentacion(){
-        MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
+    public IActionResult Presentacion()
+    {
+        var client = new MongoClient(CadenasConexion.MONGO_DB);
         var db = client.GetDatabase("Santiago Abad Clemente Arredondo|");
-        var collection = db.GetCollection<Equipo>("Equipo");
+        var collection = database.GetCollection<Equipo>("Equipo");
 
-        var lista = collection.Find(FilterDefinition<Equipo>.Empty).ToList();
+        var Filter = FilterilterDefinition<Equipo>.Empty;
+        var item = collection.Find(Filter). FirstOrDefault();
 
         return Ok(lista);
     }
