@@ -18,13 +18,13 @@ public class MiProyectoController : ControllerBase{
     public IActionResult Presentacion()
     {
         var client = new MongoClient(CadenasConexion.MONGO_DB);
-        var db = client.GetDatabase("Santiago Abad Clemente Arredondo|");
-        var collection = database.GetCollection<Equipo>("Equipo");
+        var db = client.GetDatabase("Escuela_clemente");
+        var collection = db.GetCollection<Equipo>("Equipo");
 
-        var Filter = FilterilterDefinition<Equipo>.Empty;
+        var Filter = FilterDefinition<Equipo>.Empty;
         var item = collection.Find(Filter). FirstOrDefault();
 
-        return Ok(lista);
+        return Ok(item);
     }
 
 }
