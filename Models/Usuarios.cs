@@ -1,18 +1,18 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-public class usuario 
+public class Usuario
 {
-    [BsonId, BsonRepresentation(BsonTyp.Objectd)]
+    [BsonId, BsonRepresentation(BsonType.ObjectId)]
 
     public string? Id {get; set; }
 
     [BsonElement("nombre")]
-    public string nombre { get; set;} = string.Empty;
+    public string Nombre { get; set;} = string.Empty;
 
     [BsonElement("password")]
-    public string password { get; set;} = string.Empty;
+    public string Password { get; set;} = string.Empty;
 
     [BsonElement("correo")]
-    public string correo { get; set;} = string.Empty;
+    public string Correo { get; set;} = string.Empty;
 }
