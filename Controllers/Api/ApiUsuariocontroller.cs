@@ -64,7 +64,13 @@ public class ApiUsuarioController : ControllerBase{
         {
          return BadRequest("El nombre es requerido");
         }
-
+        
+        //Validar que el correo no exista
+        var filter = Builders<Usuario>.Filter.Eq(x => x.Correo, model.Correo);
+        var item = this.collection.Find(filter).FirstOrDefault();
+        if(item != null){
+            return BadRequest("El correo " + model.Correo + " ya existe en la base de datos");
+        }
         Usuario bd = new Usuario();
         bd.Nombre = model.Nombre;
         bd.Correo = model.Correo;
